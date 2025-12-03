@@ -5,7 +5,7 @@ const PaymentPage = () => {
   const handlePayment = async () => {
     try {
       const amount = 600; // ₹500
-      const { data } = await axios.post("http://localhost:5000/api/order", { amount });
+      const { data } = await axios.post("https://razorpay-dummy-4.onrender.com/api/order", { amount });
 
       const options = {
         key: "rzp_test_RXIZlMwe6IJELU", // Only Key ID here, not secret!
@@ -15,7 +15,7 @@ const PaymentPage = () => {
         description: "Test Transaction",
         order_id: data.id,
         handler: async function (response) {
-          const verifyRes = await axios.post("http://localhost:5000/api/payment/verify", {
+          const verifyRes = await axios.post("https://razorpay-dummy-4.onrender.comapi/payment/verify", {
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,
